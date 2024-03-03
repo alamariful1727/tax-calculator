@@ -1,18 +1,25 @@
 import { FormProvider, SubmitHandler, UseFormReturn } from "react-hook-form";
 import { TextField, Select } from "src/components/inputs";
+import { ITaxRates } from "src/hooks/useTaxRates/useTaxRates";
 
 export type TTaxInputs = {
   income: number;
   year: "2019" | "2020" | "2021" | "2022";
 };
 
-interface ITaxCalculateProps {
+interface ITaxFormProps {
   formOptions: UseFormReturn<TTaxInputs>;
   onSubmit: SubmitHandler<TTaxInputs>;
   onReset: () => void;
+  queryResult: { isFetching: boolean; isError: boolean; data?: ITaxRates };
 }
 
-function TaxCalculate({ formOptions, onSubmit, onReset }: ITaxCalculateProps) {
+function TaxForm({
+  formOptions,
+  onSubmit,
+  onReset,
+  queryResult: { isFetching },
+}: ITaxFormProps) {
   return (
     <FormProvider {...formOptions}>
       <form onSubmit={formOptions.handleSubmit(onSubmit)} className="space-y-5">
@@ -39,7 +46,7 @@ function TaxCalculate({ formOptions, onSubmit, onReset }: ITaxCalculateProps) {
             type="submit"
             className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            Calculate
+            {isFetching ? "..." : "Calculate"}
           </button>
         </div>
       </form>
@@ -47,4 +54,4 @@ function TaxCalculate({ formOptions, onSubmit, onReset }: ITaxCalculateProps) {
   );
 }
 
-export default TaxCalculate;
+export default TaxForm;
