@@ -1,9 +1,15 @@
+import { Footer } from "./components";
+import Navbar from "./components/navbar/Navbar";
+import HomePage from "./pages/home";
+
 function App() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-600">
-      <h1 className="text-3xl font-bold text-white underline">
-        tax-calculator
-      </h1>
+    <div className="flex min-h-screen flex-col justify-between antialiased">
+      <Navbar />
+      <main className="flex-1 bg-white p-6">
+        <HomePage />
+      </main>
+      <Footer />
     </div>
   );
 }
