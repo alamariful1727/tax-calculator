@@ -2,6 +2,13 @@ import { FormProvider, SubmitHandler, UseFormReturn } from "react-hook-form";
 import { TextField, Select } from "src/components/inputs";
 import { ITaxRates } from "src/hooks/useTaxRates/useTaxRates";
 
+export const yearOptions = [
+  { value: "2019", label: "2019" },
+  { value: "2020", label: "2020" },
+  { value: "2021", label: "2021" },
+  { value: "2022", label: "2022" },
+];
+
 export type TTaxInputs = {
   income: number;
   year: "2019" | "2020" | "2021" | "2022";
@@ -24,16 +31,7 @@ function TaxForm({
     <FormProvider {...formOptions}>
       <form onSubmit={formOptions.handleSubmit(onSubmit)} className="space-y-5">
         <TextField name="income" type="number" label="Annual Income" />
-        <Select
-          name="year"
-          label="Tax Year"
-          options={[
-            { value: "2019", label: "2019" },
-            { value: "2020", label: "2020" },
-            { value: "2021", label: "2021" },
-            { value: "2022", label: "2022" },
-          ]}
-        />
+        <Select name="year" label="Tax Year" options={yearOptions} />
         <div className="mt-6 flex items-center justify-end gap-x-6">
           <button
             type="button"

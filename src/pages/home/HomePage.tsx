@@ -9,8 +9,10 @@ import calculateTotalIncomeTax, {
 } from "src/utils/calculateTotalIncomeTax";
 import formatCurrency from "src/utils/formatCurrency";
 import formatTaxesPerBandData from "src/utils/formatTaxesPerBandData";
+import { yupResolver } from "@hookform/resolvers/yup";
 import DisplayTaxDetails from "./components/DisplayTaxDetails";
 import TableTaxesPerBand from "./components/TableTaxesPerBand";
+import TaxFormSchema from "./components/TaxForm.validation";
 
 function HomePage() {
   const [formData, setFormData] = useState<TTaxInputs>();
@@ -19,6 +21,7 @@ function HomePage() {
       income: 0,
       year: "2022",
     },
+    resolver: yupResolver(TaxFormSchema),
   });
   const { isFetching, isError, data, error } = useTaxRates({
     year: formData?.year || "2022",
