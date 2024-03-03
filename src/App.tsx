@@ -1,16 +1,16 @@
-import { Footer } from "./components";
-import Navbar from "./components/navbar/Navbar";
+import { ErrorBoundary } from "react-error-boundary";
+import Layout from "./components/layout/Layout";
 import HomePage from "./pages/home";
+import logError from "./utils/errorLogger";
+import ErrorFallback from "./components/errorFallback/ErrorFallback";
 
 function App() {
   return (
-    <div className="flex min-h-screen flex-col justify-between antialiased">
-      <Navbar />
-      <main className="flex-1 bg-white p-6">
+    <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
+      <Layout>
         <HomePage />
-      </main>
-      <Footer />
-    </div>
+      </Layout>
+    </ErrorBoundary>
   );
 }
 
